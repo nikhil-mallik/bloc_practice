@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ui/counter/counter_screen.dart';
+import 'ui/image_picker/image_picker_screen.dart';
 import 'ui/switch_example/switch_example_screen.dart';
 
 class Home extends StatelessWidget {
@@ -49,6 +50,8 @@ class Home extends StatelessWidget {
             showPracticeList(context, 'Counter Example', const CounterScreen()),
             showPracticeList(
                 context, 'Switch Example', const SwitchExampleScreen()),
+            showPracticeList(
+                context, 'Image Picker Example', const ImagePickerScreen()),
           ],
         ),
       ),
