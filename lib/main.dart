@@ -3,7 +3,7 @@ import 'package:bloc_practice/bloc/switch_example/switch_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'ui/switch_example/switch_example_screen.dart';
+import 'home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,12 +24,13 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Bloc Practice',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const SwitchExampleScreen(),
+        home: const Home(),
       ),
     );
   }
