@@ -18,13 +18,16 @@ class FavouriteScreen extends StatelessWidget {
         actions: [
           BlocBuilder<FavouriteBloc, FavouriteState>(
             builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  context.read<FavouriteBloc>().add(DeleteFavouriteItem());
-                },
-                icon: const Icon(
-                  Icons.delete_forever,
-                  color: Colors.red,
+              return Visibility(
+                visible: state.tempFavouriteItemList.isNotEmpty ? true : false,
+                child: IconButton(
+                  onPressed: () {
+                    context.read<FavouriteBloc>().add(DeleteFavouriteItem());
+                  },
+                  icon: const Icon(
+                    Icons.delete_forever,
+                    color: Colors.red,
+                  ),
                 ),
               );
             },
