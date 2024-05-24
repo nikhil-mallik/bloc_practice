@@ -27,24 +27,63 @@ class PostScreen extends StatelessWidget {
                 case PostStatus.failure:
                   return Center(child: Text(state.message.toString()));
                 case PostStatus.success:
-                  return ListView.builder(
-                    itemCount: state.postList.length,
-                    itemBuilder: (context, index) {
-                      final item = state.postList[index];
-                      return Card(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Name: ${item.name}'),
-                            const SizedBox(height: 5),
-                            Text('Email: ${item.email}'),
-                            const SizedBox(height: 5),
-                            Text('Message: ${item.body}'),
-                            const SizedBox(height: 5),
-                          ],
+                  return Column(
+                    children: [
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          hintText: 'Search with id, name or email',
+                          border: OutlineInputBorder(),
                         ),
-                      );
-                    },
+                        onChanged: (filterText) {
+                          context.read<PostBloc>().add(SearchPost(filterText));
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      Expanded(
+                        child: state.searchMessage.isNotEmpty
+                            ? Center(child: Text(state.searchMessage))
+                            : ListView.builder(
+                                itemCount: state.tempPostList.isEmpty
+                                    ? state.postList.length
+                                    : state.tempPostList.length,
+                                itemBuilder: (context, index) {
+                                  if (state.tempPostList.isEmpty) {
+                                    final item = state.postList[index];
+                                    return Card(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Name: ${item.name}'),
+                                          const SizedBox(height: 5),
+                                          Text('Email: ${item.email}'),
+                                          const SizedBox(height: 5),
+                                          Text('Message: ${item.body}'),
+                                          const SizedBox(height: 5),
+                                        ],
+                                      ),
+                                    );
+                                  } else {
+                                    final item = state.tempPostList[index];
+                                    return Card(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Name: ${item.name}'),
+                                          const SizedBox(height: 5),
+                                          Text('Email: ${item.email}'),
+                                          const SizedBox(height: 5),
+                                          Text('Message: ${item.body}'),
+                                          const SizedBox(height: 5),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                      ),
+                    ],
                   );
               }
             },

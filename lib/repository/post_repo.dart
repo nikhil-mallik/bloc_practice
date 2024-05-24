@@ -17,6 +17,7 @@ class PostRepo {
         return body.map((e) {
           return PostModel(
             postId: e['postId'] as int,
+            id: e['id'] as int,
             name: e['name'] as String,
             email: e['email'] as String,
             body: e['body'] as String,

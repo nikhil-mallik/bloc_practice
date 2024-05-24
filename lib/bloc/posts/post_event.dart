@@ -8,3 +8,8 @@ abstract class PostEvent extends Equatable {
 }
 
 class FetchPosts extends PostEvent {}
+
+class SearchPost extends PostEvent {
+  final String searchText;
+  const SearchPost(this.searchText);
+}
