@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/counter/counter_bloc.dart';
 import 'bloc/favourite_example/favourite_bloc.dart';
 import 'bloc/image_picker/image_picker_bloc.dart';
+import 'bloc/login/login_screen_bloc.dart';
 import 'bloc/posts/post_bloc.dart';
 import 'bloc/switch_example/switch_bloc.dart';
 import 'bloc/to_do_example/to_do_bloc.dart';
