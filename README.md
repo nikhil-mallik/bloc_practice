@@ -51,13 +51,13 @@ The Bloc Practice App is designed to provide hands-on experience with the Bloc s
 To run the project locally, follow these steps :
 1. Clone the repository to your local machine.
 2. Open the project in your preferred Flutter development environment.
-3. Install dependencies:
+3. Install dependencies :
 
     ```sh
     flutter pub get
     ```
 
-4. Run the app:
+4. Run the app :
 
     ```sh
     flutter run
@@ -87,7 +87,7 @@ Shows how to manage the state of a toggle switch using Bloc.
 Allows users to pick images from their device's camera or gallery.
 
 ### ToDo Example
-Provides functionality to add, delete, and manage a list of todo items.
+Provides functionality to add, delete, and manage a list of to-do items.
 
 ### Favourite Example
 Allows marking items as favourite and deleting them.
