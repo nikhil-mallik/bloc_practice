@@ -106,10 +106,22 @@ Implements user login functionality with an HTTP API.
 
 The project utilizes the following major dependencies:
 
-- [Flutter Bloc](https://pub.dev/packages/flutter_bloc): For implementing the Bloc architecture.
-- [Get It](https://pub.dev/packages/get_it): For service location and dependency injection.
-- [Image Picker](https://pub.dev/packages/image_picker): For integrating image picking functionality.
-- [Equatable](https://pub.dev/packages/equatable): For simplifying equality comparisons for objects.
+- [Bloc](https://pub.dev/packages/bloc) : For implementing the Bloc architecture.
+- [Flutter Bloc](https://pub.dev/packages/flutter_bloc) : For integrating the Bloc code to flutter UI.
+- [Equatable](https://pub.dev/packages/equatable) : For simplifying equality comparisons for objects.
+- [Image Picker](https://pub.dev/packages/image_picker) : For integrating image picking functionality.
+- [HTTP](https://pub.dev/packages/http) : For making HTTP requests.
+- [Get It](https://pub.dev/packages/get_it) : For service location and dependency injection.
+- [Freezed Annotation](https://pub.dev/packages/freezed_annotation) : For generating code for immutable classes and unions.
+- [JSON Annotation](https://pub.dev/packages/json_annotation) : For generating code for JSON serialization and deserialization.
+- [Flutter Toast](https://pub.dev/packages/fluttertoast) : For displaying toast notifications.
+- [Another Flushbar](https://pub.dev/packages/another_flushbar) : For displaying custom flushbar notifications.
+- [Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage) : For secure storage of sensitive information.
+- [Google Fonts](https://pub.dev/packages/google_fonts) : For using custom fonts in the application.
+- [Flutter Lints](https://pub.dev/packages/flutter_lints) : For linting Flutter code.
+- [Build Runner](https://pub.dev/packages/build_runner) : For running code generation tasks.
+- [Freezed](https://pub.dev/packages/freezed) : For code generation of immutable classes and unions.
+- [JSON Serializable](https://pub.dev/packages/json_serializable) : For generating code for JSON serialization and deserialization.
 
 ## Usage
 
