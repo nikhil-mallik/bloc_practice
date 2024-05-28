@@ -1,11 +1,15 @@
-import 'package:equatable/equatable.dart';
+part of 'switch_bloc.dart';
+
 //ignore: must_be_immutable
+/// Class representing the states of switches and sliders.
 class SwitchStates extends Equatable {
-  bool isSwitch;
-  double slider;
+  final bool isSwitch;
+  final double slider;
 
-  SwitchStates({this.isSwitch = false, this.slider = 0.5});
+  /// Constructor to initialize the switch and slider states.
+  const SwitchStates({this.isSwitch = false, this.slider = 0.5});
 
+  /// Method to create a new state with updated values.
   SwitchStates copyWith({bool? isSwitch, double? slider}) {
     return SwitchStates(
       isSwitch: isSwitch ?? this.isSwitch,

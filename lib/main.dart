@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
-import 'bloc/counter/counter_bloc.dart';
-import 'bloc/favourite_example/favourite_bloc.dart';
-import 'bloc/image_picker/image_picker_bloc.dart';
-import 'bloc/login/login_screen_bloc.dart';
-import 'bloc/posts/post_bloc.dart';
-import 'bloc/switch_example/switch_bloc.dart';
-import 'bloc/to_do_example/to_do_bloc.dart';
-import 'home.dart';
-import 'repository/favourite_repo.dart';
-import 'utils/image_picker_utlis.dart';
+import 'main_import.dart';
+
+// GetIt is a package used for service locator or to manage dependency injection
+GetIt getIt = GetIt.instance;
 
 void main() {
+  servicesLocator(); // Initializing service locator for dependency injection
   runApp(const MyApp());
 }
 
@@ -23,9 +19,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // Providing blocs to the entire application
         BlocProvider(create: (_) => CounterBloc()),
         BlocProvider(create: (_) => SwitchBloc()),
-        BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtlis())),
+        BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtils())),
         BlocProvider(create: (_) => ToDoBloc()),
         BlocProvider(create: (_) => FavouriteBloc(FavouriteRepo())),
         BlocProvider(create: (_) => PostBloc()),
@@ -33,13 +30,20 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Bloc Practice',
-        themeMode: ThemeMode.dark,
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          useMaterial3: true,
-        ),
-        home: const Home(),
+        themeMode: ThemeMode.system,
+        theme: lightTheme,
+        // Light theme
+        darkTheme: darkTheme,
+        // Dark theme
+        initialRoute: RoutesName.splash,
+        // Initial route
+        onGenerateRoute: Routes.generateRoute, // Generate routes
       ),
     );
   }
+}
+
+// Method for initializing service locator
+void servicesLocator() {
+  getIt.registerLazySingleton<AuthApiRepository>(() => AuthHttpApiRepository());
 }

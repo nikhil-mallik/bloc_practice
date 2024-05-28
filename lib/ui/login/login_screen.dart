@@ -2,144 +2,73 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/login/login_screen_bloc.dart';
-import '../../utils/enums.dart';
+import '../../main.dart';
+import 'widget/widgets.dart';
 
+// LoginScreen class which is a StatefulWidget representing the login screen.
 class LoginScreen extends StatefulWidget {
+  // Constructor for LoginScreen, accepting a key.
   const LoginScreen({super.key});
 
+  // Override createState method to create state for LoginScreen.
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+// _LoginScreenState class representing the state for LoginScreen.
 class _LoginScreenState extends State<LoginScreen> {
-  late LoginScreenBloc _loginBlocs;
+  // LoginScreenBloc instance to handle login screen logic.
+  late LoginScreenBloc _loginBloc;
 
-  final emailFocusNode = FocusNode();
-  final passwordFocusNode = FocusNode();
+  // FocusNode for email input field.
+  final _emailFocusNode = FocusNode();
 
+  // FocusNode for password input field.
+  final _passwordFocusNode = FocusNode();
+
+  // GlobalKey for the form.
   final _formKey = GlobalKey<FormState>();
 
+  // initState method to initialize state.
   @override
   void initState() {
     super.initState();
-    _loginBlocs = LoginScreenBloc();
+    // Initialize LoginScreenBloc with authentication API repository.
+    _loginBloc = LoginScreenBloc(authApiRepository: getIt());
   }
 
+  // dispose method to dispose resources.
   @override
   void dispose() {
-    _loginBlocs.close();
-    print('closing blocs');
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _loginBloc.close();
     super.dispose();
   }
 
+  // build method to define the UI of the LoginScreen.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login Screen'),
-      ),
+      // Scaffold with body containing login form.
       body: BlocProvider(
-        create: (_) => _loginBlocs,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Form(
-            key: _formKey,
-            child: BlocListener<LoginScreenBloc, LoginScreenState>(
-              listenWhen: (previous, current) =>
-                  previous.loginStatus != current.loginStatus,
-              listener: (context, state) {
-                if (state.loginStatus == LoginStatus.error) {
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                        SnackBar(content: Text(state.message.toString())));
-                }
-                if (state.loginStatus == LoginStatus.success) {
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                        const SnackBar(content: Text('Login Successful')));
-                }
-              },
-              child: Center(
-                child: Column(
-                  children: [
-                    BlocBuilder<LoginScreenBloc, LoginScreenState>(
-                      buildWhen: (current, previous) =>
-                          current.email != previous.email,
-                      builder: (context, state) {
-                        return TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter your email',
-                            border: OutlineInputBorder(),
-                          ),
-                          focusNode: emailFocusNode,
-                          onChanged: (val) {
-                            context
-                                .read<LoginScreenBloc>()
-                                .add(EmailChanged(email: val));
-                          },
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'Enter Email';
-                            }
-                            return null;
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20
-                    ),
-                    BlocBuilder<LoginScreenBloc, LoginScreenState>(
-                      buildWhen: (current, previous) =>
-                          current.password != previous.password,
-                      builder: (context, state) {
-                        return TextFormField(
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter your password',
-                            border: OutlineInputBorder(),
-                          ),
-                          focusNode: passwordFocusNode,
-                          onChanged: (value) {
-                            context
-                                .read<LoginScreenBloc>()
-                                .add(PasswordChanged(password: value));
-                          },
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'Enter Password';
-                            }
-                            return null;
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 50
-                    ),
-                    BlocBuilder<LoginScreenBloc, LoginScreenState>(
-                      buildWhen: (current, previous) =>
-                          current.loginStatus != previous.loginStatus,
-                      builder: (context, state) {
-                        return ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<LoginScreenBloc>().add(LoginApi());
-                              }
-                            },
-                            child: state.loginStatus == LoginStatus.loading
-                                ? const Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                : const Text('Login'),);
-                      },
-                    )
-                  ],
-                ),
-              ),
+        // Providing LoginScreenBloc to its descendants.
+        create: (_) => _loginBloc,
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                // Widget for email input field.
+                EmailInput(focusNode: _emailFocusNode),
+                // Widget for password input field.
+                PasswordInput(focusNode: _passwordFocusNode),
+                // Widget for submit button.
+                SubmitButton(formKey: _formKey),
+              ],
             ),
           ),
         ),

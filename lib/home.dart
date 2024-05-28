@@ -1,66 +1,79 @@
 import 'package:flutter/material.dart';
 
-import 'ui/counter/counter_screen.dart';
-import 'ui/favourite_example/favourite_screen.dart';
-import 'ui/image_picker/image_picker_screen.dart';
-import 'ui/login/login_screen.dart';
-import 'ui/post/post_screen.dart';
-import 'ui/switch_example/switch_example_screen.dart';
-import 'ui/to_do_example/to_do_screen.dart';
+import 'configs/routes/routes_name.dart'; // Importing routes names for navigation
+import 'services/storage/local_storage.dart'; // Importing local storage for managing user data
 
+/// Widget for the home screen.
 class Home extends StatelessWidget {
   const Home({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    Widget showPracticeList(
-        BuildContext context, String name, Widget className) {
-      return Padding(
-        padding: const EdgeInsets.only(right: 10.0, left: 10.0, bottom: 10.0),
-        child: InkWell(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => className)),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+  /// Method to display practice list items.
+  Widget showPracticeList(BuildContext context, String name, String className) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0, left: 10.0, bottom: 10.0),
+      child: InkWell(
+        onTap: () => Navigator.pushNamed(context, className),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const Icon(Icons.arrow_forward_ios_outlined)
-                  ],
-                ),
+                  ),
+                  const Icon(Icons.arrow_forward_ios_outlined),
+                ],
               ),
             ),
           ),
         ),
-      );
-    }
+      ),
+    );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bloc Practice'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Logging out the user
+              LocalStorage localStorage = LocalStorage();
+              localStorage.clearValue('token').then((value) {
+                localStorage.clearValue('isLogin').then((value) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, RoutesName.login, (route) => false);
+                });
+              });
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-            showPracticeList(context, 'Counter Example', const CounterScreen()),
+            // Showing practice list items
             showPracticeList(
-                context, 'Switch Example', const SwitchExampleScreen()),
+                context, 'Counter Example', RoutesName.counterScreen),
             showPracticeList(
-                context, 'Image Picker Example', const ImagePickerScreen()),
-            showPracticeList(context, 'TO DO Example', const ToDoScreen()),
+                context, 'Switch Example', RoutesName.switchScreen),
             showPracticeList(
-                context, 'Favourite Example', const FavouriteScreen()),
-            showPracticeList(context, 'Get API Example', const PostScreen()),
-            showPracticeList(context, 'Login Screen', const LoginScreen()),
+                context, 'Image Picker Example', RoutesName.imagePickerScreen),
+            showPracticeList(context, 'TO DO Example', RoutesName.todoScreen),
+            showPracticeList(
+                context, 'Favourite Example', RoutesName.favouriteScreen),
+            showPracticeList(context, 'Get API Example', RoutesName.postScreen),
           ],
         ),
       ),
