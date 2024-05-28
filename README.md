@@ -10,14 +10,14 @@ The Bloc pattern is a predictable state management solution for Dart and Flutter
 
 ### Key Features:
 
-- **Counter Example**: Demonstrates simple state management by implementing a counter that can be incremented or decremented.
-- **Switch Example**: Shows how to manage the state of a toggle switch.
-- **Image Picker Example**: Integrates with the device's camera and gallery to pick images.
-- **ToDo Example**: Provides functionality to add, delete, and manage a list of todo items.
-- **Favourite Example**: Allows marking items as favourite and deleting them.
-- **API Integration**: Fetches and displays data from an external API, demonstrating how to handle HTTP requests and parse JSON data.
-- **Authentication**: Implements user login functionality with an HTTP API.
-- **State Management**: Utilizes the Bloc pattern for managing states across different features and screens.
+- **Counter Example** : Demonstrates simple state management by implementing a counter that can be incremented or decremented.
+- **Switch Example** : Shows how to manage the state of a toggle switch.
+- **Image Picker Example** : Integrates with the device's camera and gallery to pick images.
+- **ToDo Example** : Provides functionality to add, delete, and manage a list of todo items.
+- **Favourite Example** : Allows marking items as favourite and deleting them.
+- **API Integration** : Fetches and displays data from an external API, demonstrating how to handle HTTP requests and parse JSON data.
+- **Authentication** : Implements user login functionality with an HTTP API.
+- **State Management** : Utilizes the Bloc pattern for managing states across different features and screens.
 
 ## Table of Contents
 
@@ -48,7 +48,7 @@ The Bloc Practice App is designed to provide hands-on experience with the Bloc s
 
 ## Project Setup
 
-To run the project locally, follow these steps:
+To run the project locally, follow these steps :
 1. Clone the repository to your local machine.
 2. Open the project in your preferred Flutter development environment.
 3. Install dependencies:
@@ -67,13 +67,13 @@ To run the project locally, follow these steps:
 
 The project follows a modular folder structure, making it easy to locate and manage different parts of the app. Here's an overview of the main folders:
 
-- `bloc/`: Contains all the Bloc classes for state management.
-- `configs/`: Configuration files for routes and themes.
-- `model/`: Data models used in the application.
-- `repository/`: Contains classes for data fetching and manipulation.
-- `services/`: Utility classes for various services like local storage and session management.
-- `utils/`: Utility classes and functions.
-- `view/`: UI components and screens.
+- `bloc/` : Contains all the Bloc classes for state management.
+- `configs/` : Configuration files for routes and themes.
+- `model/` : Data models used in the application.
+- `repository/` : Contains classes for data fetching and manipulation.
+- `services/` : Utility classes for various services like local storage and session management.
+- `utils/` : Utility classes and functions.
+- `view/` : UI components and screens.
 
 ## Features
 
@@ -98,9 +98,9 @@ Fetches and displays data from an external API, demonstrating how to handle HTTP
 ### Authentication
 Implements user login functionality with an HTTP API.
 
-- **Auth API Repository**: Provides methods for authentication API requests.
-- **Auth HTTP API Repository**: Implements HTTP requests to the authentication API for login functionality.
-- **Mock Auth API Repository**: A mock implementation for simulating login requests.
+- **Auth API Repository** : Provides methods for authentication API requests.
+- **Auth HTTP API Repository** : Implements HTTP requests to the authentication API for login functionality.
+- **Mock Auth API Repository** : A mock implementation for simulating login requests.
 
 ## Dependencies
 
