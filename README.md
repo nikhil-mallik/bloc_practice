@@ -51,13 +51,13 @@ The Bloc Practice App is designed to provide hands-on experience with the Bloc s
 To run the project locally, follow these steps:
 1. Clone the repository to your local machine.
 2. Open the project in your preferred Flutter development environment.
-3. Install dependencies:
+3. Install dependencies :
 
     ```sh
     flutter pub get
     ```
 
-4. Run the app:
+4. Run the app :
 
     ```sh
     flutter run
@@ -67,13 +67,13 @@ To run the project locally, follow these steps:
 
 The project follows a modular folder structure, making it easy to locate and manage different parts of the app. Here's an overview of the main folders:
 
-- `bloc/`: Contains all the Bloc classes for state management.
-- `configs/`: Configuration files for routes and themes.
-- `model/`: Data models used in the application.
-- `repository/`: Contains classes for data fetching and manipulation.
-- `services/`: Utility classes for various services like local storage and session management.
-- `utils/`: Utility classes and functions.
-- `view/`: UI components and screens.
+- `bloc/` : Contains all the Bloc classes for state management.
+- `configs/` : Configuration files for routes and themes.
+- `model/` : Data models used in the application.
+- `repository/` : Contains classes for data fetching and manipulation.
+- `services/` : Utility classes for various services like local storage and session management.
+- `utils/` : Utility classes and functions.
+- `view/` : UI components and screens.
 
 ## Features
 
@@ -87,7 +87,7 @@ Shows how to manage the state of a toggle switch using Bloc.
 Allows users to pick images from their device's camera or gallery.
 
 ### ToDo Example
-Provides functionality to add, delete, and manage a list of todo items.
+Provides functionality to add, delete, and manage a list of to-do items.
 
 ### Favourite Example
 Allows marking items as favourite and deleting them.
@@ -98,9 +98,9 @@ Fetches and displays data from an external API, demonstrating how to handle HTTP
 ### Authentication
 Implements user login functionality with an HTTP API.
 
-- **Auth API Repository**: Provides methods for authentication API requests.
-- **Auth HTTP API Repository**: Implements HTTP requests to the authentication API for login functionality.
-- **Mock Auth API Repository**: A mock implementation for simulating login requests.
+- **Auth API Repository** : Provides methods for authentication API requests.
+- **Auth HTTP API Repository** : Implements HTTP requests to the authentication API for login functionality.
+- **Mock Auth API Repository** : A mock implementation for simulating login requests.
 
 ## Dependencies
 
