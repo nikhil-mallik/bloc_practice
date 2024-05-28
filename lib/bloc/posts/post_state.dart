@@ -1,9 +1,8 @@
-import 'package:equatable/equatable.dart';
+part of 'post_bloc.dart';
 
-import '../../model/post_item_model.dart';
-import '../../utils/enums.dart';
-
+/// Class representing the state of post-related data.
 class PostState extends Equatable {
+  /// Constructor for PostState, with default values for its properties.
   const PostState({
     this.postStatus = PostStatus.loading,
     this.postList = const <PostModel>[],
@@ -12,18 +11,29 @@ class PostState extends Equatable {
     this.searchMessage = '',
   });
 
+  /// Status of post data.
   final PostStatus postStatus;
+
+  /// List of posts.
   final List<PostModel> postList;
+
+  /// Temporary list of posts used for filtering.
   final List<PostModel> tempPostList;
+
+  /// Message associated with the post state.
   final String message;
+
+  /// Message associated with the search operation.
   final String searchMessage;
 
-  PostState copyWith(
-      {PostStatus? postStatus,
-      List<PostModel>? postList,
-      String? message,
-      List<PostModel>? tempPostList,
-      String? searchMessage}) {
+  /// Method to create a copy of the current state with some updated values.
+  PostState copyWith({
+    PostStatus? postStatus,
+    List<PostModel>? postList,
+    String? message,
+    List<PostModel>? tempPostList,
+    String? searchMessage,
+  }) {
     return PostState(
       postStatus: postStatus ?? this.postStatus,
       postList: postList ?? this.postList,

@@ -1,19 +1,28 @@
 import 'package:equatable/equatable.dart';
 
+/// Model representing a favorite item.
 class FavouriteItemModel extends Equatable {
-  final String id;
-  final String value;
-  final bool isDeleting;
-  final bool isFavourite;
+  final String id; // The ID of the favorite item
+  final String value; // The value of the favorite item
+  final bool isDeleting; // Flag indicating whether the item is being deleted
+  final bool
+      isFavourite; // Flag indicating whether the item is marked as a favorite
+
+  /// Constructor for creating a FavouriteItemModel instance.
   const FavouriteItemModel({
     required this.id,
     required this.value,
-    this.isDeleting = false,
-    this.isFavourite = false,
+    this.isDeleting = false, // Default value for isDeleting
+    this.isFavourite = false, // Default value for isFavourite
   });
 
-  FavouriteItemModel copyWith(
-      {String? id, String? value, bool? isDeleting, bool? isFavourite}) {
+  /// Method for creating a copy of the FavouriteItemModel instance with some fields updated.
+  FavouriteItemModel copyWith({
+    String? id,
+    String? value,
+    bool? isDeleting,
+    bool? isFavourite,
+  }) {
     return FavouriteItemModel(
       id: id ?? this.id,
       value: value ?? this.value,
