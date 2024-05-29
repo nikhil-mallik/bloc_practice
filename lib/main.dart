@@ -8,7 +8,8 @@ import 'main_import.dart';
 GetIt getIt = GetIt.instance;
 
 void main() {
-  servicesLocator(); // Initializing service locator for dependency injection
+  // Initializing service locator for dependency injection
+  servicesLocator();
   runApp(const MyApp());
 }
 
@@ -31,13 +32,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Bloc Practice',
         themeMode: ThemeMode.system,
-        theme: lightTheme,
         // Light theme
-        darkTheme: darkTheme,
+        theme: lightTheme,
         // Dark theme
-        initialRoute: RoutesName.splash,
+        darkTheme: darkTheme,
         // Initial route
-        onGenerateRoute: Routes.generateRoute, // Generate routes
+        initialRoute: RoutesName.splash,
+        // Generate routes
+        onGenerateRoute: Routes.generateRoute,
       ),
     );
   }

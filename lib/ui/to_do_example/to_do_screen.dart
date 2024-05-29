@@ -13,19 +13,20 @@ class ToDoScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Todo Example'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: BlocBuilder<ToDoBloc, ToDoState>(
-          builder: (context, state) {
-            // If no to-do tasks are available, display a message
-            if (state.todoEvent.isEmpty) {
-              return const Center(
-                child: Text('No Event found'),
-              );
-            }
-            // If to-do tasks are available, display them in a list
-            else if (state.todoEvent.isNotEmpty) {
-              return ListView.builder(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: BlocBuilder<ToDoBloc, ToDoState>(
+            builder: (context, state) {
+              // If no to-do tasks are available, display a message
+              if (state.todoEvent.isEmpty) {
+                return const Center(
+                  child: Text('No Event found'),
+                );
+              }
+              // If to-do tasks are available, display them in a list
+              else if (state.todoEvent.isNotEmpty) {
+                return ListView.builder(
                   itemCount: state.todoEvent.length,
                   itemBuilder: (context, index) {
                     return ListTile(
@@ -41,15 +42,17 @@ class ToDoScreen extends StatelessWidget {
                         color: Colors.red,
                       ),
                     );
-                  });
-            }
-            // Handle any other cases
-            else {
-              return const Center(
-                child: Text('Something went wrong'),
-              );
-            }
-          },
+                  },
+                );
+              }
+              // Handle any other cases
+              else {
+                return const Center(
+                  child: Text('Something went wrong'),
+                );
+              }
+            },
+          ),
         ),
       ),
       // Add a floating action button to add new to-do tasks
