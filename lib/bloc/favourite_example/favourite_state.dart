@@ -1,24 +1,24 @@
 part of 'favourite_bloc.dart';
 
-// FavouriteState class that extends Equatable to ensure value equality.
+/// FavouriteState class that extends Equatable to ensure value equality.
 class FavouriteState extends Equatable {
-  // List to hold favourite items.
+  /// List to hold favourite items.
   final List<FavouriteItemModel> favouriteItemList;
 
-  // Temporary list to hold favourite items.
+  /// Temporary list to hold favourite items.
   final List<FavouriteItemModel> tempFavouriteItemList;
 
-  // Status of the list operation.
+  /// Status of the list operation.
   final ListStatus listStatus;
 
-  // Constructor for FavouriteState with default values.
+  /// Constructor for FavouriteState with default values.
   const FavouriteState({
     this.favouriteItemList = const [],
     this.tempFavouriteItemList = const [],
     this.listStatus = ListStatus.loading,
   });
 
-  // Method to create a copy of the current state with updated values.
+  /// Method to create a copy of the current state with updated values.
   FavouriteState copyWith({
     List<FavouriteItemModel>? favouriteItemList,
     ListStatus? listStatus,
@@ -32,7 +32,7 @@ class FavouriteState extends Equatable {
     );
   }
 
-  // Overriding props method to include properties for value comparison.
+  /// Overriding props method to include properties for value comparison.
   @override
   List<Object?> get props => [
         favouriteItemList,

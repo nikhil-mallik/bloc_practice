@@ -7,12 +7,12 @@ import '../../utils/image_picker_utlis.dart';
 part 'image_picker_event.dart';
 part 'image_picker_state.dart';
 
-// ImagePickerBloc class which extends Bloc to handle ImagePickerEvent and ImagePickerState.
+/// ImagePickerBloc class which extends Bloc to handle ImagePickerEvent and ImagePickerState.
 class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
-  // Utility class to handle image picking functionality.
+  /// Utility class to handle image picking functionality.
   final ImagePickerUtils imagePickerUtils;
 
-  // Constructor for ImagePickerBloc, initializing with the image picker utility.
+  /// Constructor for ImagePickerBloc, initializing with the image picker utility.
   ImagePickerBloc(this.imagePickerUtils) : super(const ImagePickerState()) {
     // Registering the event handlers.
     on<CameraImage>(_captureImage);
@@ -20,7 +20,7 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
     on<RemoveImage>(_removeImage);
   }
 
-  // Handler for capturing an image from the camera.
+  /// Handler for capturing an image from the camera.
   void _captureImage(
       CameraImage event, Emitter<ImagePickerState> states) async {
     // Capture an image using the camera.
@@ -29,7 +29,7 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
     states(state.copyWith(file: file));
   }
 
-  // Handler for picking an image from the gallery.
+  /// Handler for picking an image from the gallery.
   void _galleryImage(
       GalleryImage event, Emitter<ImagePickerState> states) async {
     // Pick an image from the gallery.
@@ -38,7 +38,7 @@ class ImagePickerBloc extends Bloc<ImagePickerEvent, ImagePickerState> {
     states(state.copyWith(file: file));
   }
 
-  // Handler for removing the selected image.
+  /// Handler for removing the selected image.
   void _removeImage(RemoveImage event, Emitter<ImagePickerState> states) async {
     // Set the file to null to indicate no image.
     const XFile? file = null;

@@ -40,69 +40,71 @@ class FavouriteScreen extends StatelessWidget {
           ),
         ],
       ), // Padding around the body content.
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        // BlocBuilder to rebuild the UI based on the state of FavouriteBloc.
-        child: BlocBuilder<FavouriteBloc, FavouriteState>(
-          builder: (context, state) {
-            switch (state.listStatus) {
-              case ListStatus.loading:
-                // Displaying a loading indicator while the list is being fetched.
-                return const Center(child: CircularProgressIndicator());
-              case ListStatus.failure:
-                // Displaying an error message if the list fetching fails.
-                return const Center(child: Text('Something went wrong'));
-              case ListStatus.success:
-                // Displaying the list of favourite items when the list is successfully fetched.
-                return ListView.builder(
-                  itemCount: state.favouriteItemList.length,
-                  itemBuilder: (context, index) {
-                    final item = state.favouriteItemList[index];
-                    return Card(
-                      child: ListTile(
-                        // Checkbox to select or unselect items.
-                        leading: Checkbox(
-                          value: state.tempFavouriteItemList.contains(item),
-                          onChanged: (val) {
-                            if (val!) {
-                              // Adding SelectItem event when an item is selected.
-                              context
-                                  .read<FavouriteBloc>()
-                                  .add(SelectItem(itemModel: item));
-                            } else {
-                              // Adding UnSelectItem event when an item is unselected.
-                              context
-                                  .read<FavouriteBloc>()
-                                  .add(UnSelectItem(itemModel: item));
-                            }
-                          },
-                        ),
-                        // Displaying the item's value.
-                        title: Text(item.value.toString()),
-                        // Button to toggle the favourite status of an item.
-                        trailing: IconButton(
-                          onPressed: () {
-                            FavouriteItemModel favouriteItemModel =
-                                FavouriteItemModel(
-                                    id: item.id,
-                                    value: item.value,
-                                    isFavourite: !item.isFavourite);
-                            // Adding FavouriteItem event to update the item's favourite status.
-                            context.read<FavouriteBloc>().add(
-                                FavouriteItem(itemModel: favouriteItemModel));
-                          },
-                          icon: Icon(
-                            item.isFavourite
-                                ? Icons.favorite
-                                : Icons.favorite_outline_outlined,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          // BlocBuilder to rebuild the UI based on the state of FavouriteBloc.
+          child: BlocBuilder<FavouriteBloc, FavouriteState>(
+            builder: (context, state) {
+              switch (state.listStatus) {
+                case ListStatus.loading:
+                  // Displaying a loading indicator while the list is being fetched.
+                  return const Center(child: CircularProgressIndicator());
+                case ListStatus.failure:
+                  // Displaying an error message if the list fetching fails.
+                  return const Center(child: Text('Something went wrong'));
+                case ListStatus.success:
+                  // Displaying the list of favourite items when the list is successfully fetched.
+                  return ListView.builder(
+                    itemCount: state.favouriteItemList.length,
+                    itemBuilder: (context, index) {
+                      final item = state.favouriteItemList[index];
+                      return Card(
+                        child: ListTile(
+                          // Checkbox to select or unselect items.
+                          leading: Checkbox(
+                            value: state.tempFavouriteItemList.contains(item),
+                            onChanged: (val) {
+                              if (val!) {
+                                // Adding SelectItem event when an item is selected.
+                                context
+                                    .read<FavouriteBloc>()
+                                    .add(SelectItem(itemModel: item));
+                              } else {
+                                // Adding UnSelectItem event when an item is unselected.
+                                context
+                                    .read<FavouriteBloc>()
+                                    .add(UnSelectItem(itemModel: item));
+                              }
+                            },
+                          ),
+                          // Displaying the item's value.
+                          title: Text(item.value.toString()),
+                          // Button to toggle the favourite status of an item.
+                          trailing: IconButton(
+                            onPressed: () {
+                              FavouriteItemModel favouriteItemModel =
+                                  FavouriteItemModel(
+                                      id: item.id,
+                                      value: item.value,
+                                      isFavourite: !item.isFavourite);
+                              // Adding FavouriteItem event to update the item's favourite status.
+                              context.read<FavouriteBloc>().add(
+                                  FavouriteItem(itemModel: favouriteItemModel));
+                            },
+                            icon: Icon(
+                              item.isFavourite
+                                  ? Icons.favorite
+                                  : Icons.favorite_outline_outlined,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-            }
-          },
+                      );
+                    },
+                  );
+              }
+            },
+          ),
         ),
       ),
     );

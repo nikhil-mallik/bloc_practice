@@ -51,24 +51,26 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // Scaffold with body containing login form.
-      body: BlocProvider(
-        // Providing LoginScreenBloc to its descendants.
-        create: (_) => _loginBloc,
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                // Widget for email input field.
-                EmailInput(focusNode: _emailFocusNode),
-                // Widget for password input field.
-                PasswordInput(focusNode: _passwordFocusNode),
-                // Widget for submit button.
-                SubmitButton(formKey: _formKey),
-              ],
+      body: SafeArea(
+        child: BlocProvider(
+          // Providing LoginScreenBloc to its descendants.
+          create: (_) => _loginBloc,
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  // Widget for email input field.
+                  EmailInput(focusNode: _emailFocusNode),
+                  // Widget for password input field.
+                  PasswordInput(focusNode: _passwordFocusNode),
+                  // Widget for submit button.
+                  SubmitButton(formKey: _formKey),
+                ],
+              ),
             ),
           ),
         ),

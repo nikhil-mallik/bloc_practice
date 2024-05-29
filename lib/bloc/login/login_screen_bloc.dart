@@ -8,32 +8,34 @@ import '../../utils/enums.dart';
 part 'login_screen_event.dart';
 part 'login_screen_state.dart';
 
-// LoginScreenBloc class which extends Bloc to handle LoginScreenEvent and LoginScreenState.
+/// LoginScreenBloc class which extends Bloc to handle LoginScreenEvent and LoginScreenState.
 class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
-  // Repository for authentication API.
+  /// Repository for authentication API.
   AuthApiRepository authApiRepository;
 
-  // Constructor for LoginScreenBloc, initializing with the authentication API repository.
-  LoginScreenBloc({required this.authApiRepository}) : super(const LoginScreenState()) {
+  /// Constructor for LoginScreenBloc, initializing with the authentication API repository.
+  LoginScreenBloc({required this.authApiRepository})
+      : super(const LoginScreenState()) {
     // Registering the event handlers.
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<LoginApi>(_loginApi);
   }
 
-  // Handler for handling email change event.
+  /// Handler for handling email change event.
   void _onEmailChanged(EmailChanged event, Emitter<LoginScreenState> emit) {
     // Emitting a new state with updated email.
     emit(state.copyWith(email: event.email));
   }
 
-  // Handler for handling password change event.
-  void _onPasswordChanged(PasswordChanged event, Emitter<LoginScreenState> emit) {
+  /// Handler for handling password change event.
+  void _onPasswordChanged(
+      PasswordChanged event, Emitter<LoginScreenState> emit) {
     // Emitting a new state with updated password.
     emit(state.copyWith(password: event.password));
   }
 
-  // Handler for handling login API call event.
+  /// Handler for handling login API call event.
   void _loginApi(LoginApi event, Emitter<LoginScreenState> emit) async {
     // Creating a map with email and password.
     Map<String, String> data = {
@@ -41,10 +43,10 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
       'password': state.password,
     };
 
-    // Emitting a new state with login status set to loading.
+    /// Emitting a new state with login status set to loading.
     emit(state.copyWith(loginStatus: LoginStatus.loading));
 
-    // Calling the login API and handling response.
+    /// Calling the login API and handling response.
     await authApiRepository.loginApi(data).then((value) async {
       if (value.error.isNotEmpty) {
         // If there's an error, emitting a new state with error message and login status set to error.
@@ -63,4 +65,3 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     });
   }
 }
-

@@ -8,18 +8,18 @@ import '../../utils/enums.dart';
 part 'favourite_event.dart';
 part 'favourite_state.dart';
 
-// FavouriteBloc class which extends Bloc to handle FavouriteEvent and FavouriteState.
+/// FavouriteBloc class which extends Bloc to handle FavouriteEvent and FavouriteState.
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
-  // List to hold the favourite items.
+  /// List to hold the favourite items.
   List<FavouriteItemModel> favouriteList = [];
 
-  // Temporary list to hold selected favourite items.
+  /// Temporary list to hold selected favourite items.
   List<FavouriteItemModel> tempFavouriteList = [];
 
-  // Repository to fetch favourite items.
+  /// Repository to fetch favourite items.
   FavouriteRepo favouriteRepo;
 
-  // Constructor for FavouriteBloc, initializing with the favourite repository.
+  /// Constructor for FavouriteBloc, initializing with the favourite repository.
   FavouriteBloc(this.favouriteRepo) : super(const FavouriteState()) {
     // Registering the event handlers.
     on<FetchFavouriteList>(fetchFavouriteList);
@@ -29,7 +29,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     on<DeleteFavouriteItem>(_deleteItems);
   }
 
-  // Handler for fetching the favourite list.
+  /// Handler for fetching the favourite list.
   void fetchFavouriteList(
       FetchFavouriteList event, Emitter<FavouriteState> states) async {
     favouriteList = await favouriteRepo.fetchItem();
@@ -39,7 +39,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     ));
   }
 
-  // Handler for adding favourite items.
+  /// Handler for adding favourite items.
   void _addFavouriteItems(
       FavouriteItem event, Emitter<FavouriteState> states) async {
     final index =
@@ -58,17 +58,17 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       tempFavouriteList.add(event.itemModel);
     }
 
-    // Update the favourite list with the new item model.
+    /// Update the favourite list with the new item model.
     favouriteList[index] = event.itemModel;
 
-    // Emit the new state with updated lists.
+    /// Emit the new state with updated lists.
     states(state.copyWith(
       favouriteItemList: List.from(favouriteList),
       tempFavouriteItemList: List.from(tempFavouriteList),
     ));
   }
 
-  // Handler for selecting items.
+  /// Handler for selecting items.
   void _selectItems(SelectItem event, Emitter<FavouriteState> states) async {
     // Add the selected item to the temporary list.
     tempFavouriteList.add(event.itemModel);
@@ -77,7 +77,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     states(state.copyWith(tempFavouriteItemList: List.from(tempFavouriteList)));
   }
 
-  // Handler for unselecting items.
+  /// Handler for unselecting items.
   void _unSelectItems(
       UnSelectItem event, Emitter<FavouriteState> states) async {
     // Remove the unselected item from the temporary list.
@@ -87,7 +87,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     states(state.copyWith(tempFavouriteItemList: List.from(tempFavouriteList)));
   }
 
-  // Handler for deleting favourite items.
+  /// Handler for deleting favourite items.
   void _deleteItems(
       DeleteFavouriteItem event, Emitter<FavouriteState> states) async {
     // Remove all items in the temporary list from the favourite list.
@@ -98,7 +98,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     // Clear the temporary list.
     tempFavouriteList.clear();
 
-    // Emit the new state with updated lists.
+    /// Emit the new state with updated lists.
     states(state.copyWith(
       favouriteItemList: List.from(favouriteList),
       tempFavouriteItemList: List.from(tempFavouriteList),
